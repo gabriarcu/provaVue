@@ -1,37 +1,70 @@
 <template>
   <v-container>
-    <v-card class="mx-auto" max-width="344" v-for="p in this.prodotti" :key="p.id">
-      <v-img height="200px" :src="p.images[0]" cover></v-img>
+    <v-btn @click="this.estrai()" class="mb-3">clicca</v-btn>
+    <!-- <p v-if="this.sx.length > 0">Sx {{ this.sx[this.p - 1] }}</p> <br>
+    <p v-if="this.dx.length > 0">Dx {{ this.dx[this.p - 1] }}</p> -->
 
-      <v-card-title>
-        {{ p.title }}
-      </v-card-title>
+    <v-row>
+      <v-col>
+        <v-card class="mx-auto" max-width="400" v-if="this.sx.length">
+          <v-img class="align-end text-white" height="200" :src="this.sx[this.p - 1].images[0]" cover>
 
-      <v-card-subtitle>
-        1,000 miles of wonder
-      </v-card-subtitle>
+          <!-- <v-img class="align-end text-white" height="200" :src="this.sx[this.p - 1].images[0]" cover> -->
+            <v-card-title>{{ this.sx[this.p - 1].title }}</v-card-title>
+          </v-img>
 
-      <v-card-actions>
-        <v-btn color="orange-lighten-2" text="Explore"></v-btn>
-
-        <v-spacer></v-spacer>
-
-        <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show"></v-btn>
-      </v-card-actions>
-
-      <v-expand-transition>
-        <div v-show="show">
-          <v-divider></v-divider>
+          <v-card-subtitle class="pt-4">
+            {{ this.sx[this.p - 1].description }}
+          </v-card-subtitle>
 
           <v-card-text>
-            I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for
-            sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you
-            add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to
-            escape.
+            <div>
+              <v-list>
+                <v-list-subheader>Categoria</v-list-subheader>
+                <v-list-item :prepend-avatar="this.sx[this.p - 1].category.image" 
+                  :title="this.sx[this.p - 1].category.name">
+                </v-list-item>
+              </v-list>
+            </div>
+            <div>Prezzo: € {{ this.sx[this.p - 1].price }}</div>
           </v-card-text>
-        </div>
-      </v-expand-transition>
-    </v-card>
+
+          <v-card-actions>
+            <v-btn color="orange" text="Vota"></v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+      <v-col>
+        <v-card class="mx-auto" max-width="400" v-if="this.dx.length">
+          <v-img class="align-end text-white" height="200" :src="this.dx[this.p - 1].images[0]" cover>
+
+          <!-- <v-img class="align-end text-white" height="200" :src="this.sx[this.p - 1].images[0]" cover> -->
+            <v-card-title>{{ this.dx[this.p - 1].title }}</v-card-title>
+          </v-img>
+
+          <v-card-subtitle class="pt-4">
+            {{ this.dx[this.p - 1].description }}
+          </v-card-subtitle>
+
+          <v-card-text>
+            <div>
+              <v-list>
+                <v-list-subheader>Categoria</v-list-subheader>
+                <v-list-item :prepend-avatar="this.dx[this.p - 1].category.image" 
+                  :title="this.dx[this.p - 1].category.name">
+                </v-list-item>
+              </v-list>
+            </div>
+            <div>Prezzo: € {{ this.dx[this.p - 1].price }}</div>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-btn color="orange" text="Vota"></v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+
   </v-container>
 </template>
 
@@ -43,18 +76,56 @@ export default {
     return {
       prodotti: [],
       show: false,
+      estratti: [],
+      disponibili: [],
+      sx: [],
+      dx: [],
+      pos: 0,
+      p: 0
     }
 
   },
   methods: {
     async getProdotti() {
-      await fetch('https://api.escuelajs.co/api/v1/products')
+      await fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=64')
         .then(response => response.json())
         .then(data => {
           this.prodotti = data;
           console.log(this.prodotti);
+        })
+        .then(() => {
+          this.prodotti.forEach(p => {
+            this.disponibili.push(p);
+          });
         });
-    }
+    },
+    estrai() {
+
+      //get lunghezza di disponibili
+      for (let i = 0; i < 2; i++) {
+        let numero = this.disponibili.length;
+        if (numero == 0) {
+          console.log('finiti i prodotti');
+          return;
+        }
+        console.log(numero);
+        let random = Math.floor(Math.random() * numero);
+        this.estratti.push(this.disponibili[random]);
+        this.disponibili.splice(random, 1);
+        if (i == 0) {
+          this.sx.push(this.estratti[this.pos]);
+        }
+        else {
+          this.dx.push(this.estratti[this.pos + 1]);
+        }
+
+      }
+      this.pos = this.pos + 2;
+      this.p = this.p + 1;
+
+    },
+
+
   },
   created() {
     this.getProdotti();
