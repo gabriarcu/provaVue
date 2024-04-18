@@ -1,21 +1,21 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
-  </nav>
+  </nav> -->
   <router-view />
   <v-layout>
     <v-bottom-navigation>
-      <v-btn value="recent">
-        <v-icon>mdi-home-circle</v-icon>
+      <v-btn value="home"  to="/">
+        <v-icon>mdi-home</v-icon>
 
         <span>Home</span>
       </v-btn>
 
-      <v-btn value="favorites">
-        <v-icon>mdi-heart</v-icon>
+      <v-btn value="stat" to="/statistiche">
+        <v-icon>mdi-finance</v-icon>
 
-        <span>Favorites</span>
+        <span>Statistiche</span>
       </v-btn>
 
       <v-btn value="nearby">
