@@ -14,4 +14,6 @@ const vuetify = createVuetify({
   directives,
 })
 
-createApp(App).use(router).use(vuetify).mount('#app')
+import VueApexCharts from "vue3-apexcharts";
+
+createApp(App).use(router).use(vuetify).use(VueApexCharts).mount('#app')

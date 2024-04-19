@@ -1,10 +1,14 @@
 <template>
   <v-container>
-    <!-- <v-btn @click="this.estrai()" class="mb-3">clicca</v-btn> -->
-    <!-- <p v-if="this.sx.length > 0">Sx {{ this.sx[this.p - 1] }}</p> <br>
-    <p v-if="this.dx.length > 0">Dx {{ this.dx[this.p - 1] }}</p> -->
-    <v-card class="mx-auto" v-if="this.primo == true" prepend-icon="mdi-numeric-1-box-multiple-outline"
+    <v-card class="mb-3" style="border-color: white;" color="#202225" prepend-icon="mdi-ballot-recount-outline"
       subtitle="Vota il tuo prodotto preferito">
+      <template v-slot:title >
+        <span class="font-weight-black">Best products</span>
+      </template>
+    </v-card>
+
+    <v-card class="mx-auto" v-if="this.primo == true" prepend-icon="mdi-numeric-1-box-multiple-outline"
+      :subtitle="'Estratti '+ this.estratti.length + '/'+ this.disponibili.length + ' Disponibili'">
       <template v-slot:title>
         <span class="font-weight-black">Primo Round</span>
       </template>
@@ -76,7 +80,7 @@
     </v-card>
 
     <v-card class="mx-auto mt-3" id="secondo" v-if="this.secondo == true" prepend-icon="mdi-numeric-2-box-multiple-outline"
-      subtitle="Vota il tuo prodotto preferito">
+      :subtitle="'Estratti '+ this.estratti.length + '/'+ this.disponibili.length + ' Disponibili'">
       <template v-slot:title>
         <span class="font-weight-black">Secondo Round</span>
       </template>
@@ -148,7 +152,7 @@
     </v-card>
 
     <v-card class="mx-auto mt-3" id="terzo" v-if="this.terzo == true" prepend-icon="mdi-numeric-3-box-multiple-outline"
-      subtitle="Vota il tuo prodotto preferito">
+      :subtitle="'Estratti '+ this.estratti.length + '/'+ this.disponibili.length + ' Disponibili'">
       <template v-slot:title>
         <span class="font-weight-black">Terzo Round</span>
       </template>
@@ -220,7 +224,7 @@
     </v-card>
 
     <v-card class="mx-auto mt-3" id="quarto" v-if="this.quarto == true" prepend-icon="mdi-numeric-4-box-multiple-outline"
-      subtitle="Vota il tuo prodotto preferito">
+      :subtitle="'Estratti '+ this.estratti.length + '/'+ this.disponibili.length + ' Disponibili'">
       <template v-slot:title>
         <span class="font-weight-black">Quarto Round</span>
       </template>
@@ -292,7 +296,7 @@
     </v-card>
 
     <v-card class="mx-auto mt-3" id="quinto" v-if="this.quinto == true" prepend-icon="mdi-numeric-5-box-multiple-outline"
-      subtitle="Vota il tuo prodotto preferito">
+      :subtitle="'Estratti '+ this.estratti.length + '/'+ this.disponibili.length + ' Disponibili'">
       <template v-slot:title>
         <span class="font-weight-black">Quinto Round</span>
       </template>
@@ -537,7 +541,11 @@ export default {
         }
         if(this.finale == true){
           this.dx.push(this.disponibili[0]);
-          localStorage.setItem('winner', JSON.stringify(this.dx[0]));
+
+          let nuovoVincitore = this.dx[0];
+          let vincitoriAttuali = JSON.parse(localStorage.getItem("winner")) || [];
+          vincitoriAttuali.push(nuovoVincitore);
+          localStorage.setItem("winner", JSON.stringify(vincitoriAttuali));
           this.dialog2 = true;
           return;
         }
