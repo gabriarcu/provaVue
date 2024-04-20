@@ -18,11 +18,11 @@
         <span>Statistiche</span>
       </v-btn>
 
-      <v-btn value="nearby">
+      <!-- <v-btn value="nearby">
         <v-icon>mdi-map-marker</v-icon>
 
         <span>Nearby</span>
-      </v-btn>
+      </v-btn> -->
     </v-bottom-navigation>
   </v-layout>
 </template>

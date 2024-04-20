@@ -16,7 +16,7 @@
       <v-card-text class="bg-surface-light">
         <v-row class="mb-10">
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.sx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.sx.length" @click="this.vota(this.sx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.sx[this.p - 1].images[0])"
                 cover>
 
@@ -40,13 +40,13 @@
                 <div>Prezzo: € {{ this.sx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.sx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.dx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.dx.length" @click="this.vota(this.dx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.dx[this.p - 1].images[0])"
                 cover>
 
@@ -70,9 +70,9 @@
                 <div>Prezzo: € {{ this.dx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.dx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
         </v-row>
@@ -88,7 +88,7 @@
       <v-card-text class="bg-surface-light">
         <v-row class="mb-10">
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.sx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.sx.length" @click="this.vota(this.sx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.sx[this.p - 1].images[0])"
                 cover>
 
@@ -112,13 +112,13 @@
                 <div>Prezzo: € {{ this.sx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.sx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.dx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.dx.length" @click="this.vota(this.dx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.dx[this.p - 1].images[0])"
                 cover>
 
@@ -142,9 +142,9 @@
                 <div>Prezzo: € {{ this.dx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.dx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
         </v-row>
@@ -160,7 +160,7 @@
       <v-card-text class="bg-surface-light">
         <v-row class="mb-10">
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.sx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.sx.length" @click="this.vota(this.sx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.sx[this.p - 1].images[0])"
                 cover>
 
@@ -184,13 +184,13 @@
                 <div>Prezzo: € {{ this.sx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.sx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.dx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.dx.length" @click="this.vota(this.dx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.dx[this.p - 1].images[0])"
                 cover>
 
@@ -214,9 +214,9 @@
                 <div>Prezzo: € {{ this.dx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.dx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
         </v-row>
@@ -232,7 +232,7 @@
       <v-card-text class="bg-surface-light">
         <v-row class="mb-10">
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.sx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.sx.length" @click="this.vota(this.sx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.sx[this.p - 1].images[0])"
                 cover>
 
@@ -256,13 +256,13 @@
                 <div>Prezzo: € {{ this.sx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.sx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.dx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.dx.length" @click="this.vota(this.dx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.dx[this.p - 1].images[0])"
                 cover>
 
@@ -286,9 +286,9 @@
                 <div>Prezzo: € {{ this.dx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.dx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
         </v-row>
@@ -304,7 +304,7 @@
       <v-card-text class="bg-surface-light">
         <v-row class="mb-10">
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.sx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.sx.length" @click="this.vota(this.sx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.sx[this.p - 1].images[0])"
                 cover>
 
@@ -328,13 +328,13 @@
                 <div>Prezzo: € {{ this.sx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.sx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
           <v-col>
-            <v-card class="mx-auto" max-width="400" v-if="this.dx.length">
+            <v-card class="mx-auto" max-width="400" v-if="this.dx.length" @click="this.vota(this.dx[this.p - 1])">
               <v-img class="align-end text-white" height="200" :src="this.getImage(this.dx[this.p - 1].images[0])"
                 cover>
 
@@ -358,9 +358,9 @@
                 <div>Prezzo: € {{ this.dx[this.p - 1].price }}</div>
               </v-card-text>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn color="orange" text="Vota" @click="this.vota(this.dx[this.p - 1])"></v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
         </v-row>

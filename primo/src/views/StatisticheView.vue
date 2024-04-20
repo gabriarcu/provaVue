@@ -7,46 +7,112 @@
       </template>
     </v-card>
 
-    <v-card class="mx-auto" prepend-icon="mdi-trophy-outline" subtitle="Product & Category">
+    <v-card class="mx-auto mb-3" prepend-icon="mdi-trophy-outline" subtitle="Top" v-if="this.winner==null">
       <template v-slot:title>
-        <span class="font-weight-black">Top</span>
+        <span class="font-weight-black">Products & Categories</span>
       </template>
 
-      <v-card-text class="bg-surface-light">
+      <v-card-text class="bg-surface-light" height="350">
         <v-row class="mb-10">
           <v-col>
-            <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
-          </v-col>
-          <v-col>
-            <v-table height="350px" fixed-header>
-              <thead>
-                <tr>
-                  <th class="text-left">
-                    #
-                  </th>
-                  <th class="text-left">
-                    Nome
-                  </th>
-                  <th class="text-left">
-                    Voti
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(item, index) in this.prodottiOrdinati" :key="index" class="text-left">
-                  <td>{{ index + 1 }}</td>
-                  <td>{{ item.nome }}</td>
-                  <td>{{ item.quantita }}</td>
-                </tr>
-              </tbody>
-            </v-table>
+            <v-card class="mx-auto" color="#202225" dark max-width="500">
+              <v-card-text>
+                <v-row>
+                  <v-col>
+                    <v-card-title class="text-center">
+                      <v-img class="text-white mt-4" max-height="500" max-width="500"
+                        src="https://static.vecteezy.com/system/resources/previews/019/852/279/original/no-data-empty-data-concept-illustration-free-vector.jpg"
+                        cover rounded="lg"></v-img>
+                    </v-card-title>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card>
           </v-col>
         </v-row>
       </v-card-text>
     </v-card>
 
+    <v-row>
+      <v-col xs="12" sm="6">
+        <v-card class="mx-auto mb-3" prepend-icon="mdi-trophy-outline" subtitle="Top" v-if="this.winner!=null">
+          <template v-slot:title>
+            <span class="font-weight-black">Products</span>
+          </template>
+
+          <v-card-text class="bg-surface-light">
+            <v-row class="mb-10">
+              <v-col>
+                <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
+                <v-table height="350px" fixed-header>
+                  <thead>
+                    <tr>
+                      <th class="text-left">
+                        #
+                      </th>
+                      <th class="text-left">
+                        Nome
+                      </th>
+                      <th class="text-left">
+                        Voti
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in this.prodottiOrdinati" :key="index" class="text-left">
+                      <td>{{ index + 1 }}</td>
+                      <td>{{ item.nome }}</td>
+                      <td>{{ item.quantita }}</td>
+                    </tr>
+                  </tbody>
+                </v-table>
+              </v-col>
 
 
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col xs="0" sm="6">
+        <v-card class="mx-auto" prepend-icon="mdi-trophy-outline" subtitle="Top" v-if="this.winner!=null">
+          <template v-slot:title>
+            <span class="font-weight-black">Categories</span>
+          </template>
+
+          <v-card-text class="bg-surface-light">
+            <v-row class="mb-10">
+              <v-col>
+                <apexchart type="bar" height="350" :options="chartOptions2" :series="series2"></apexchart>
+                <v-table height="350px" fixed-header>
+                  <thead>
+                    <tr>
+                      <th class="text-left">
+                        #
+                      </th>
+                      <th class="text-left">
+                        Nome
+                      </th>
+                      <th class="text-left">
+                        Voti
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(item, index) in this.categorieOrdinate" :key="index" class="text-left">
+                      <td>{{ index + 1 }}</td>
+                      <td>{{ item.nome }}</td>
+                      <td>{{ item.quantita }}</td>
+                    </tr>
+                  </tbody>
+                </v-table>
+              </v-col>
+
+
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script>
@@ -60,7 +126,10 @@ export default {
       categorieOrdinate: [],
       series: [{
         data: []
-      }], 
+      }],
+      series2: [{
+        data: []
+      }],
       chartOptions: {
         chart: {
           type: 'bar',
@@ -77,6 +146,28 @@ export default {
         },
         xaxis: {
           categories: [],
+          convertedCatToNumeric: true,
+          tickAmount: 1,
+        }
+      },
+      chartOptions2: {
+        chart: {
+          type: 'bar',
+          height: 350
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 4,
+            horizontal: true,
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        xaxis: {
+          categories: [],
+          convertedCatToNumeric: true,
+          tickAmount: 1,
         }
       },
     }
@@ -129,25 +220,32 @@ export default {
       return { prodottiOrdinati, categorieOrdinate };
     },
     putLabel() {
-      let cat = [];
       this.prodottiOrdinati.forEach(item => (this.chartOptions.xaxis.categories).push(item.nome));
-      return cat;
+      this.categorieOrdinate.forEach(item => (this.chartOptions2.xaxis.categories).push(item.nome));
     },
     putQuantita() {
-      this.prodottiOrdinati.forEach(item => (this.series[0].data).push(item.quantita));
-    
+      this.prodottiOrdinati.forEach(item => (this.series[0].data).push(parseInt(item.quantita)));
+      this.categorieOrdinate.forEach(item => (this.series2[0].data).push(parseInt(item.quantita)));
+
     },
+    check() {
+      if (this.winner != null) {
+        const { prodottiOrdinati, categorieOrdinate } = this.contaProdottiECategorie();
+        this.prodottiOrdinati = prodottiOrdinati;
+        this.categorieOrdinate = categorieOrdinate;
+        
+        this.putLabel();
+        this.putQuantita();
+      }
+    }
   },
   mounted() {
     //
   },
   created() {
     this.getWinner();
-    const { prodottiOrdinati, categorieOrdinate } = this.contaProdottiECategorie();
-    this.prodottiOrdinati = prodottiOrdinati;
-    this.categorieOrdinate = categorieOrdinate;
-    this.putLabel();
-    this.putQuantita();
+    this.check();
+
   },
 }
 </script>
